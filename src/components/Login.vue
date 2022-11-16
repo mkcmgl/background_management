@@ -23,7 +23,7 @@ export default {
     methods: {
         setToken(){
             const myToken ={
-                token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE1MTI1NDQyOTksImV4cCI6MTUxMjYzMDY5OX0.eGrsrvwHm-tPsO9r_pxHIQ5i5L1kX9RX444uwnRGaIM"
+                token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2Njg1MjI1MTUsImV4cCI6MTY2ODYwODkxNX0._1exB8PayUfou_dQ1QeL3GKOeooVX9GlOrK4tJsYNTs"
             }
             window.sessionStorage.setItem("token",myToken.token)
             this.$router.push('/home')

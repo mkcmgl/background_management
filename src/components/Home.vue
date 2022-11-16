@@ -10,19 +10,26 @@
 
         </el-header>
         <el-container>
-            <el-aside width="200px">
-                <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-                    background-color="#333744" text-color="#fff" active-text-color="#ffd04b">
-                    <el-submenu index="1">
+            <el-aside :width="isCollapse ?' 64px ': '200px'">
+                <div class="toggle-button" @click="showMenu">|||</div>
+                <el-menu 
+                    :unique-opened="true" :collapse="isCollapse" 
+                    router :collapse-transition="false"
+                    :default-active="activePath"
+                    background-color="#333744" text-color="#fff" active-text-color="#409BFF">
+                    <el-submenu  v-for="(item,i) in menuList" :key="item.id" :index="i+''">
                         <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>导航一</span>
+                            <i :class="iconsObj[item.id]"></i>
+                            <span>{{item.authName}}</span>
                         </template>
 
-                        <el-menu-item index="1-4-1"> 
+                        <el-menu-item 
+                         v-for="(subItem ,i) in item.children" :key="subItem.id"
+                           :index="'/'+subItem.path"
+                           @click="saveNavState('/'+subItem.path)"> 
                             <template slot="title">
-                                <i class="el-icon-location"></i>
-                                <span>导航一</span>
+                                <i class="el-icon-menu"></i>
+                                <span>{{subItem.authName}}</span>
                             </template>
                         </el-menu-item>
 
@@ -30,7 +37,9 @@
 
                 </el-menu>
             </el-aside>
-            <el-main>Main</el-main>
+            <el-main>
+                <router-view></router-view>
+            </el-main>
         </el-container>
     </el-container>
 
@@ -42,11 +51,22 @@ export default {
 
     data() {
         return {
-
+            menuList:[],
+            // iconsObj绑定data的id，来决定哪个id对应哪个icon
+            iconsObj:{
+                '125':'iconfont icon-users',
+                '103':'iconfont icon-tijikongjian',
+                '101':'iconfont icon-3702mima',
+                '102':'iconfont icon-danju',
+                '145':'iconfont icon-baobiao'
+            },
+            isCollapse:false,
+            activePath:''
         };
     },
     created() {
         this.getMenuList()
+        this.activePath=window.sessionStorage.getItem('activePath')
     },
     mounted() {
 
@@ -61,9 +81,17 @@ export default {
 
         },
         handleOpen() { },
-        getMenuList(){
-          const res=  this.$http.get('menus')
-          console.log(res)
+       async getMenuList(){
+          const {data:res} = await this.$http.get('menus')
+          if(res.meta.status!==200) return this.$message.error()
+          this.menuList= res.data
+        } ,
+        showMenu(){
+            this.isCollapse =!this.isCollapse
+        },
+        saveNavState(path){
+            window.sessionStorage.setItem('activePath',path)
+            this.activePath=path
         }
     },
 };
@@ -92,8 +120,10 @@ export default {
 .el-aside {
     background-color: #333744;
     color: #333;
-    text-align: center;
     line-height: 200px;
+    .el-menu{
+        border-right: none;
+    }
 }
 
 .el-main {
@@ -105,5 +135,17 @@ export default {
 
 .home-container {
     height: 100%;
+}
+.iconfont{
+    margin-right: 10px;
+}
+.toggle-button{
+    background-color: #4a5064;
+    font-size: 0.625rem;
+    color: #FFF;
+    line-height: 1.5rem;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
 }
 </style>

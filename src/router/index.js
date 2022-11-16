@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
+import Welcome from '../components/Welcome.vue'
+import users from '../components/users'
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,8 +25,23 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component:Home
+    component:Home,
+    redirect:'/welcome',
+    children:[
+      {
+        path: '/welcome',
+        name: 'welcome',
+        component:Welcome
+      },
+      {
+        path: '/users',
+        name: 'users',
+        component:users
+      }
+    ]
   }
+  ,
+
 ]
 
 const router = new VueRouter({
