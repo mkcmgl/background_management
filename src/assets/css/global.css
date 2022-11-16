@@ -14,3 +14,7 @@ html,body,#app{
     margin-top: .9375rem;
     font-size: .75rem;
 }
+.el-pagination{
+    margin-top: .9375rem;
+    text-align: right;
+}

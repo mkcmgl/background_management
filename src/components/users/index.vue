@@ -38,7 +38,7 @@
             <el-table-column prop="mg_state" label="状态" >
                 <template slot-scope="scope">
                     
-                    <el-switch v-model="scope.row.mg_state"
+                    <el-switch v-model="scope.row.mg_state" @change="roleChange(scope.row)"
                     >
                     
                     </el-switch>
@@ -59,11 +59,11 @@
         <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
-      :page-sizes="[10, 20, 30, 50]"
-      :page-size="100"
+      :current-page="queryInfo.pagenum"
+      :page-sizes="[1, 2, 3, 5]"
+      :page-size="queryInfo.pagesize"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="400">
+      :total="total">
     </el-pagination>
     </div>
 </template>
@@ -100,11 +100,21 @@ export default {
             this.userList = res.data.users
             this.total = res.data.total
         },
-        handleSizeChange(){
-
+        handleSizeChange(newSize){
+            this.queryInfo.pagesize=newSize
+            this.getUserList()
         },
-        handleCurrentChange(){
-            
+        handleCurrentChange(newPage){
+            this.queryInfo.pagenum=newPage
+            this.getUserList()
+        },
+        async roleChange(val){
+         const {data:res}=await   this.$http.put(`users/${val.id}/state/${val.mg_state}`)
+         if (res.meta.status !== 200) {
+            val.mg_state=!val.mg_state
+                return this.$message.error('更新用户状态失败')
+            }
+            this.$message.success('更新用户状态成功')
         }
     },
 };
