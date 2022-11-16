@@ -18,3 +18,7 @@ html,body,#app{
     margin-top: .9375rem;
     text-align: right;
 }
+
+.el-dialog__footer{
+    text-align: center;
+}
