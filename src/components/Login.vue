@@ -21,11 +21,14 @@ export default {
     },
 
     methods: {
-        setToken(){
-            const myToken ={
-                token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2Njg1MjI1MTUsImV4cCI6MTY2ODYwODkxNX0._1exB8PayUfou_dQ1QeL3GKOeooVX9GlOrK4tJsYNTs"
+        async setToken(){
+            const user ={
+               username:'admin',
+               password:'123456',
             }
-            window.sessionStorage.setItem("token",myToken.token)
+            const {data:res} =await this.$http.post('login',user)
+            if(res.meta.status!==200) return this.$message.error()
+            window.sessionStorage.setItem("token",res.data.token)
             this.$router.push('/home')
         }
     },
