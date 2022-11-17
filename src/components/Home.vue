@@ -129,14 +129,14 @@ export default {
 .el-main {
     background-color: #FFFF;
     color: #333;
-    text-align: center;
+
 }
 
 .home-container {
     height: 100%;
 }
 .iconfont{
-    margin-right: 10px;
+    margin-right: 0.625rem;
 }
 .toggle-button{
     background-color: #4a5064;
