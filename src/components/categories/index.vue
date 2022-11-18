@@ -151,6 +151,7 @@ methods: {
             // 为当前分类的等级赋值
             // 三级，level为2，父id pid=1
             this.addCateForm.cat_level = this.selectedKeys.length
+            return
         } else {
             // 一级，重置level为0，父id pid=0
             // 父级分类的Id
@@ -159,7 +160,7 @@ methods: {
             this.addCateForm.cat_level = 0
         }
     },
-    addCateDailogClose() {
+    () {
         this.$refs.addCateFormRef.resetFields()
         // 重置绑定的数组
         this.selectedKeys = []
@@ -185,5 +186,8 @@ methods: {
 <style lang="scss" scoped>
 .treeTable {
     margin-bottom: .9375rem;
+}
+.el-cascader{
+    width: 100%;
 }
 </style>
