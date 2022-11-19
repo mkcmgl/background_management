@@ -190,10 +190,7 @@ export default {
           { required: true, message: '请输入参数名称', trigger: 'blur' }
         ]
       },
-      // // 控制按钮与文本框切换显示
-      // inputVisible:false,
-      // // 文本框输入内容
-      // inputValue:''
+
     
         };
     },
