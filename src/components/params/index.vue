@@ -114,6 +114,38 @@
         </el-tab-pane>
       </el-tabs>
         </el-card>
+
+           <!-- 添加参数的对话框 -->
+    <!-- 共用一个 ，titletext直接用-->
+    <el-dialog :title="'添加' + titleText" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
+      
+      <!-- 添加参数的对话框 -->
+      <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px">
+        <el-form-item :label="titleText" prop="attr_name">
+          <el-input v-model="addForm.attr_name"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addParams">确 定</el-button>
+      </span>
+    </el-dialog>
+
+
+
+    <!-- 修改参数的对话框 -->
+    <el-dialog :title="'修改' + titleText" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed">
+      <!-- 添加参数的对话框 -->
+      <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="100px">
+        <el-form-item :label="titleText" prop="attr_name">
+          <el-input v-model="editForm.attr_name"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editParams">确 定</el-button>
+      </span>
+    </el-dialog>
     </div>
 </template>
 
