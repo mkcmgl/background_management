@@ -23,3 +23,9 @@ html,body,#app{
 .el-dialog__footer{
     text-align: center;
 }
+.el-steps{
+    margin: .9375rem 0;
+}
+.el-step__title{
+    font-size: .8125rem;
+}

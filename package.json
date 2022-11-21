@@ -20,6 +20,7 @@
     "vue-table-with-tree-grid": "^0.2.4"
   },
   "devDependencies": {
+    "lodash": "^4.17.21",
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",

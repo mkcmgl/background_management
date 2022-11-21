@@ -14,7 +14,7 @@
 
                 </el-col>
                 <el-col :span="4">
-                    <el-button type="primary">添加商品</el-button>
+                    <el-button type="primary" @click="goAddpage">添加商品</el-button>
                 </el-col>
             </el-row>
 
