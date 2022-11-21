@@ -8,8 +8,10 @@
         <el-card>
             <el-row :gutter="20">
                 <el-col :span="8">
-                    <el-input v-model="searchMsg" placeholder="请输入"></el-input>
-                    <el-button slot="appen" icon="el-icon-search"></el-button>
+                    <el-input placeholder="请输入内容" v-model="queryInfo.query" clearable @clear="getGoodsList">
+                        <el-button slot="append" icon="el-icon-search" @click="getGoodsList"></el-button>
+                    </el-input>
+
                 </el-col>
                 <el-col :span="4">
                     <el-button type="primary">添加商品</el-button>
@@ -31,7 +33,7 @@
                         <el-button type="primary" icon="el-icon-edit" size="mini">
 
                         </el-button>
-                        <el-button type="danger" icon="el-icon-delete" size="mini">
+                        <el-button @click="removeById(scope.row)" type="danger" icon="el-icon-delete" size="mini">
 
                         </el-button>
                     </template>
@@ -78,11 +80,38 @@ export default {
             this.goodsList = res.data.goods
             this.total = res.data.total
         },
-        handleSizeChange(){
-
+        handleSizeChange(size) {
+            this.queryInfo.pagesize = size
+            this.getGoodsList()
         },
-        handleCurrentChange(){},
-        
+        handleCurrentChange(pagenum) {
+            this.queryInfo.pagenum = pagenum
+            this.getGoodsList()
+        },
+        async removeById(id) {
+            const confirmResult = await this.$confirm(
+                '此操作将永久删除该商品, 是否继续?',
+                '提示',
+                {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }
+            ).catch(err => err)
+            if (confirmResult !== 'confirm') {
+                return this.$message.info('已经取消删除！')
+            }
+            const { data: res } = await this.$http.delete(`goods/${id}`)
+            if (res.meta.status !== 200) {
+                return this.$message.error('删除失败！')
+            }
+            this.$message.success('删除成功！')
+            this.getGoodsList()
+        },
+        goAddpage() {
+            this.$router.push('/goods/add')
+        }
+
     },
 };
 </script>
