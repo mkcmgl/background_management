@@ -76,17 +76,17 @@
               </el-upload>
           </el-tab-pane>
           <el-tab-pane  label="商品内容" name="4">
-            <!-- <quill-editor v-model="addForm.goods_introduce"></quill-editor> -->
+            <quill-editor v-model="addForm.goods_introduce"></quill-editor>
               <!-- 添加商品的按钮 -->
-              <!-- <el-button type="primary" class="btnAdd" @click="add">添加商品</el-button> -->
+              <el-button type="primary" class="btnAdd" @click="add">添加商品</el-button>
           </el-tab-pane>
         </el-tabs>
         </el-form>
         </el-card>
-              <!-- 图片预览
+              <!-- 图片预览 -->
       <el-dialog title="图片预览" :visible.sync="previewVisible" width="50%">
         <img :src="previewPath" alt="" class="previewImg">
-      </el-dialog> -->
+      </el-dialog>
     </div>
 </template>
 
@@ -304,5 +304,16 @@ activeIndex:'0',
 </script>
 
 <style lang="scss" scoped>
-
+  .el-checkbox {
+      // 覆盖默认样式，只要右边有margin，为了对齐
+    margin: 0 10px 0 0 !important;
+  }
+  .previewImg {
+      // 占满宽度
+    width: 100%;
+  }
+  .btnAdd {
+      // 添加商品按钮上边距
+    margin-top: 15px;
+  }
 </style>
