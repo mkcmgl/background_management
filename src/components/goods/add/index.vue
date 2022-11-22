@@ -113,6 +113,9 @@ activeIndex:'0',
           attrs: []
         },
         addFormRules: {
+
+
+            
           goods_name: [
             { required: true, message: '请输入商品名称', trigger: 'blur' }
           ],
