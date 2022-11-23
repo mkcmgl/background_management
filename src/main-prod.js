@@ -17,7 +17,7 @@ import nprogress from 'nprogress';
 Vue.config.productionTip = false
 Vue.component('tree-table',TreeTable)
 import axios from 'axios';
-axios.defaults.baseURL='http://127.0.0.1:8888/api/private/v1/'
+axios.defaults.baseURL='http://49.233.37.179:8888/api/private/v1/'
 // axios.defaults.baseURL='http://121.4.255.161:8888/api/private/v1/'
 axios.interceptors.request.use(config=>{
   nprogress.start()

@@ -2,6 +2,7 @@
     <div class="login">
         <div class="center">
             <el-button type="primary" @click="setToken">登录</el-button>
+            <el-button type="primary" @click="setTokenTest">测试</el-button>
         </div>
     </div>
 </template>
@@ -29,6 +30,14 @@ export default {
             const {data:res} =await this.$http.post('login',user)
             if(res.meta.status!==200) return this.$message.error()
             window.sessionStorage.setItem("token",res.data.token)
+            this.$router.push('/home')
+        },
+        async setTokenTest(){
+            const user ={
+                token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2NjkyMTQ3MjksImV4cCI6MTY2OTMwMTEyOX0.tV1wzAb7Z8ny7N31OltuKMGM99Gj3bHyexZ5zTbiBa0"
+            }
+          
+            window.sessionStorage.setItem("token",user.token)
             this.$router.push('/home')
         }
     },
