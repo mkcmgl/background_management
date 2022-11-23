@@ -35,10 +35,10 @@
                                             type="success">{{ itemChildren.authName }}</el-tag>
                                         <i class="el-icon-caret-right"></i>
                                     </el-col>
-                                    <el-col :span="15">
+                                    <el-col :span="18">
                                         <!--三级权限 -->
                                         <el-tag closable @close="removeRightById(scope.row, itemc.id)" type="warning"
-                                            v-for="(itemc, i) in itemChildren.children" :key="itemc.id">
+                                            v-for="(itemc) in itemChildren.children" :key="itemc.id">
                                             {{ itemc.authName }}</el-tag>
                                     </el-col>
                                 </el-row>
