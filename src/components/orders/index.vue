@@ -51,7 +51,7 @@
       ref="addressFormRef" label-width="100px">
         <el-form-item label="省市区/县" prop="address1">
           <el-cascader :options="cityData" 
-          v-model="addressForm.address1"></el-cascader>
+          v-model="addressForm.address1" clearable  ></el-cascader>
         </el-form-item>
         <el-form-item label="详细地址" prop="address2">
           <el-input v-model="addressForm.address2"></el-input>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import cityData from './citydata';
 export default {
     name: 'orders',
 
@@ -168,7 +169,7 @@ export default {
       }
   ],},
    //   重名简写
-        cityData:'',
+        cityData,
       progressVisible: false,
      
         };
